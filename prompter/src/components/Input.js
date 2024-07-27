@@ -13,4 +13,4 @@ function Input({prompt, setPrompt})
     );
 }
 
-export default InputComponent;
+export default Input;
