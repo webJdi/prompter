@@ -1,35 +1,23 @@
-import logo from './logo.svg';
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import Input from "./components/Input";
+import Controls from './components/Controls';
+import Output from './components/Output';
 import './App.css';
-
 
 function App() {
   const [prompt, setPrompt] = useState('');
   const [improvedPrompt, setImprovedPrompt] = useState('');
 
-  const improvePrompt = (type) => {
-    let newPrompt = prompt;
-    switch (type) {
-      case 'grammar':
-        newPrompt = correctGrammar(newPrompt);
-        break;
-      case 'synonyms':
-        newPrompt = replaceSynonyms(newPrompt);
-        break;
-      default:
-        break;
+  const improvePrompt = async (type) => {
+    try {
+      const response = await axios.post('http://localhost:5000/improve', {
+        prompt: prompt,
+      });
+      setImprovedPrompt(response.data.improved_prompt);
+    } catch (error) {
+      console.error('Error improving prompt:', error);
     }
-    setImprovedPrompt(newPrompt);
-  };
-  const correctGrammar = (text) => {
-    // Logic to correct grammar
-    return text;
-  };
-
-  const replaceSynonyms = (text) => {
-    // Logic to replace synonyms
-    return text; 
   };
 
   return (
