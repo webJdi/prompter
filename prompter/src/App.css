@@ -36,3 +36,30 @@
     transform: rotate(360deg);
   }
 }
+
+/*/////////////////////////////////////////////////*/
+/*////////////////// Prompto //////////////////////*/
+/*/////////////////////////////////////////////////*/
+
+html,body
+{
+  background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+  height: 100%;
+  width: 100%;
+}
+
+#atomlogo
+{
+  color: #fff;
+}
+#inputtxt
+{
+  border: none;
+  width: 15em;
+  padding: 2em;
+
+}
+#heading
+{
+
+}
