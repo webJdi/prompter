@@ -10,6 +10,7 @@ CORS(app)
 
 
 nltk.download('wordnet')
+nltk.download('punkt')
 
 @app.route('/improve', methods=['POST'])
 def improve_prompt():
@@ -25,20 +26,22 @@ def improve_prompt():
     return jsonify({'improved_prompt': improved_prompt})
 
 def enhanceVocab(prompt):
-    words = prompt.split()
+    words = nltk.word_tokenize(prompt)
     improved_words = []
-    
+
     for word in words:
         synonyms = wordnet.synsets(word)
         if synonyms:
-            lemmas = synonyms[0].lemmas()
-            if lemmas:
-                improved_words.append(lemmas[0].name())
+            # Use the most common synonym that is not the original word
+            lemma_names = synonyms[0].lemma_names()
+            if lemma_names:
+                best_synonym = next((syn for syn in lemma_names if syn != word), word)
+                improved_words.append(best_synonym)
             else:
                 improved_words.append(word)
         else:
             improved_words.append(word)
-    
+
     return ' '.join(improved_words)
 
 def enhanceGramm(prompt):
