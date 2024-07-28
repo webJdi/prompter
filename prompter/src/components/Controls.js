@@ -3,7 +3,7 @@ import React from 'react';
 function Controls({ improvePrompt }) {
   return (
     <div>
-      <button onClick={() => improvePrompt('grammar')}>Improve Prompt!</button>
+      <button id='sub_btn' onClick={() => improvePrompt('grammar')}>Improve Prompt!</button>
     </div>
   );
 }
